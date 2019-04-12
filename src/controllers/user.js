@@ -65,11 +65,11 @@ module.exports = {
       $unwind: '$analytics',
     },
     {
-      $unwind: '$analytics.productsScanned',
+      $unwind: '$analytics.productsReaded',
     },
     {
       $group: {
-        _id: '$analytics.productsScanned',
+        _id: '$analytics.productsReaded.product',
         total: {
           $sum: 1,
         },
