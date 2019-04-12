@@ -20,7 +20,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 
 // routes
-app.use('/users', usersRoutes)
+app.use('/', usersRoutes)
 
 // start the server
 app.listen(app.get('port'), () => {

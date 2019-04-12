@@ -21,6 +21,8 @@ const userSchema = new Schema({
     systemVersion: String,
     appVersion: String,
   }],
+}, {
+  collection: 'col',
 })
 
 module.exports = mongoose.model('user', userSchema)
