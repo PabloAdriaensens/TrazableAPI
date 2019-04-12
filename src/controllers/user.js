@@ -10,9 +10,25 @@ module.exports = {
     }
   },
   getBrand: async (req, res, next) => {
-    try {
-    } catch (err) {
-      throw new Error(err)
-    }
+    const results = await User.aggregate([{
+      '$group': {
+        _id: '$devices.brand',
+        total: {
+          $sum: 1,
+        },
+      },
+    }])
+
+    const resp = results.map((r) => {
+      const brand = r._id[0] || ''
+      const total = r.total
+
+      return {
+        brand,
+        total,
+      }
+    })
+
+    res.status(200).json(resp)
   },
 }

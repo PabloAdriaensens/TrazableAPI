@@ -3,11 +3,24 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
   analytics: {
-    ipAddressses: [{}],
+    ipAddressses: [{
+      _id: Schema.Types.ObjectId,
+      ipAddress: String,
+      date: Date,
+    }],
     productsReaded: [{}],
-    bacodesFailed: [{}],
+    bacodesFailed: [{
+      _id: Schema.Types.ObjectId,
+      barcode: String,
+      date: Date,
+    }],
     querySeraches: [{}],
-    productsViewed: [{}],
+    productsViewed: [{
+      _id: Schema.Types.ObjectId,
+      product: Schema.Types.ObjectId,
+      origin: String,
+      date: Date,
+    }],
   },
   username: String,
   email: String,
