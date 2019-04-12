@@ -59,4 +59,32 @@ module.exports = {
 
     return res.status(200).json(results)
   },
+
+  getProductsScanned: async (req, res, next) => {
+    const results = await User.aggregate([{
+      $unwind: '$analytics',
+    },
+    {
+      $unwind: '$analytics.productsScanned',
+    },
+    {
+      $group: {
+        _id: '$analytics.productsScanned',
+        total: {
+          $sum: 1,
+        },
+      },
+    },
+    {
+      $sort: {
+        'total': -1,
+      },
+    },
+    {
+      $limit: 10,
+    },
+    ])
+
+    return res.status(200).json(results)
+  },
 }
